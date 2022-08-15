@@ -1,5 +1,6 @@
 from random import randint
 import timeit
+from typing import List
 
 def binary_contains(index: int = [], target: int = 0 ) -> bool:
     low: int = 0
@@ -20,16 +21,19 @@ def linear_contains(index: int = [], target: int = 0 ) -> bool:
             return True
     return False
 
-def random_numer(low: int = 0, high: int = 1000000):
+def random_numer(low: int = 0, high: int = 1000000) -> int:
     return randint(low, high)
 
-index: int = []
-for i in range(0, 1000000):
-    index.append(i)
+def create_index(min: int, max: int) -> List[int]:
+    index: int = []
+    for i in range(min, max):
+        index.append(i)
+    return index
 
 if __name__ == "__main__":
-    result_bc = timeit.repeat('binary_contains(index, random_numer())',globals=globals(), number=10000)
-    result_lc = timeit.repeat('linear_contains(index, random_numer())',globals=globals(), number=10000)
+    index : int = create_index(0, 1000000)
+    result_bc = timeit.repeat('binary_contains(index, random_numer())',globals=globals(), number=100)
+    result_lc = timeit.repeat('linear_contains(index, random_numer())',globals=globals(), number=100)
     print("Binary search duration: {}".format(min(result_bc)))
     print("Linear search duration: {}".format(min(result_lc)))
-    print("Binary search is " + str(round((min(result_lc)/min(result_bc)),2)) + " times faster than linear search")
+    print("Binary search is " + str(round((min(result_lc)/min(result_bc)))) + " times faster than linear search")
