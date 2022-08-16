@@ -55,15 +55,14 @@ class Queue(Generic[T]):
 class PriorityQueue(Generic[T]):
     def __init__(self) -> None:
         self._container: List[T] = []
-        self._counter: int = 0
     @property
     def empty(self) -> bool:
         return not self._container
     def push(self, item: T) -> None:
-        heappush(self._container, (self._counter, item))
-        self._counter += 1
+        heappush(self._container, (item))
+
     def pop(self) -> T:
-        return heappop(self._container)[1]
+        return heappop(self._container)
     def __repr__(self) -> str:
         return repr(self._container)
 
