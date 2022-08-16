@@ -122,3 +122,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# no IDE Setting in Git
+.idea/
