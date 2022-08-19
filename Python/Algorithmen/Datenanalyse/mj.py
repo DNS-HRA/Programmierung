@@ -21,8 +21,10 @@ if __name__ == "__main__":
                            Album("Music & Me", 1973, 32.09, 10), Album("Forever, Michael", 1975, 33.36, 10),
                            Album("Off the Wall", 1979, 42.28, 10), Album("Thriller", 1982, 42.19, 9),
                            Album("Bad", 1987, 48.16, 10), Album("Dangerous", 1991, 77.03, 14),
-                           Album("HIStory: Past, Present and Future, Book I", 1995, 148.58, 30), Album("Invincible", 2001, 77.05, 16)]
+                           Album("HIStory: Past, Present and Future, Book I", 1995, 148.58, 30), Album("Invincible",
+                                                                                                       2001, 77.05, 16)]
     kmeans: KMeans[Album] = KMeans(2, albums)
     clusters: List[KMeans.Cluster] = kmeans.run()
     for index, cluster in enumerate(clusters):
-        print(f"Cluster {index} Durchschnittslänge {cluster.centroid.dimensions[0]} Durchschnitt Tracks {cluster.centroid.dimensions[1]}: {cluster.points}\n")
+        print(f"Cluster {index} Durchschnittslänge {cluster.centroid.dimensions[0]} "
+              f"Durchschnitt Tracks {cluster.centroid.dimensions[1]}: {cluster.points}\n")
