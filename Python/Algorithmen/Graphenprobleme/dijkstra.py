@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from mst import WeightedPath, print_weighted_path
 from weighted_graph import WeightedGraph
 from weighted_edge import WeightedEdge
-from Notebooks.Suche.generic_search import PriorityQueue
+from Algorithmen.Suche.generic_search import PriorityQueue
 
 V = TypeVar('V')  # Typ der Knoten im Graphen
 

@@ -1,4 +1,4 @@
-from Notebooks.Suche.generic_search import bfs, Node, node_to_path
+from Algorithmen.Suche.generic_search import bfs, Node, node_to_path
 from graph import Graph
 from typing import TypeVar, List, Optional
 from weighted_graph import WeightedGraph
