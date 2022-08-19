@@ -1,8 +1,8 @@
-import hikari # Import the hikari module (Discord API)
-import lightbulb # Import the lightbulb module (Eventhandler)
-from decouple import config # read env variables for token
-import sentry_sdk # get errors on runtime via mail
-import aiohttp # handle datastore and api requests
+import hikari  # Import the hikari module (Discord API)
+import lightbulb  # Import the lightbulb module (Eventhandler)
+from decouple import config  # read env variables for token
+import sentry_sdk  # get errors on runtime via mail
+import aiohttp  # handle datastore and api requests
 
 # Init Sentry to catch errors on runtime
 sentry_sdk.init(
@@ -16,31 +16,36 @@ sentry_sdk.init(
 
 # Init Bot with token and guild IDs
 bot = lightbulb.BotApp(
-    token=config('TOKEN'), 
+    token=config('TOKEN'),
     # used to enable slash commands on discord
     default_enabled_guilds=974573532312924160
-    )
+)
+
 
 # Log status of bot
 @bot.listen(hikari.StartedEvent)
 async def on_start(event):
     print('Bot started')
 
+
 # Define Datastore on startup
 @bot.listen()
 async def on_starting(event: hikari.StartingEvent) -> None:
     bot.d.aio_session = aiohttp.ClientSession()
+
 
 # delete datastore on shutdown
 @bot.listen()
 async def on_stopping(event: hikari.StoppingEvent) -> None:
     await bot.d.aio_session.close()
 
+
 # Error handling
 @bot.listen(lightbulb.CommandErrorEvent)
 async def on_error(event: lightbulb.CommandErrorEvent) -> None:
     if isinstance(event.exception, lightbulb.CommandInvocationError):
-        await event.context.respond(f"Something went wrong during invocation of command `{event.context.command.name}`.")
+        await event.context.respond(
+            f"Something went wrong during invocation of command `{event.context.command.name}`.")
         raise event.exception
 
     # Unwrap the exception to get the original cause
@@ -50,6 +55,7 @@ async def on_error(event: lightbulb.CommandErrorEvent) -> None:
         await event.context.respond("You are not the owner of this bot.")
     elif isinstance(exception, lightbulb.CommandIsOnCooldown):
         await event.context.respond(f"This command is on cooldown. Retry in `{exception.retry_after:.2f}` seconds.")
+
 
 bot.load_extensions_from("./extensions", must_exist=True, recursive=True)
 
