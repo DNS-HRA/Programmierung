@@ -1,4 +1,4 @@
-# Programmierung in Python
+# Programmierung in Go
 Dieser Ordner enthält alle Go Projekte
 ## Aktuelle Themen:
 - Webentwicklung
