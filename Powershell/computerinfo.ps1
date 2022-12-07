@@ -1,0 +1,1 @@
+Get-Service | Where-Object Status -CEQ Running | Select-Object DisplayName, Name | Sort-Object DisplayName
